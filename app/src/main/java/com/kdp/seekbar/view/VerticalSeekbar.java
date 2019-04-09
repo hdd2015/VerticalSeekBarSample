@@ -122,7 +122,9 @@ public class VerticalSeekbar extends android.support.v7.widget.AppCompatSeekBar 
                 int downY = (int) event.getY();
                 percent = 1 - (float) (downY - width / 2) / seekBarHeight;
                 if (percent >1) percent =1;
-                setProgress((int) (getMax() * percent));
+                if(percent >= 0){//防止Thumb在界面上越出进度条
+                    setProgress((int) (getMax() * percent));
+                }
                 if (onSeekBarChangeListener!=null)
                     onSeekBarChangeListener.onProgressChanged(this,getProgress(),false);
                 break;
